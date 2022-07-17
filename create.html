@@ -87,7 +87,10 @@
       </nav>
     </div>
     <div class="drop-down">
-      <span>Choose a community</span>
+      <div>
+        <img src="reddit-assets/planet.png" alt="reddit planet icon" />
+        <span>Choose a community</span>
+      </div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="down-arrow"
@@ -103,9 +106,17 @@
         />
       </svg>
     </div>
-    <div class="create">
+    <div class="create-post">
       <form>
-        <input type="text" />
+        <input type="text" placeholder="Title" />
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          placeholder="Text (optional)"
+        ></textarea>
+        <div class="btn">Post</div>
       </form>
     </div>
     <script src="script.js"></script>
