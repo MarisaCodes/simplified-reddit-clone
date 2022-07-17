@@ -71,7 +71,7 @@
             </svg>
           </a>
           <div>
-            <a href="index.html">
+            <a style="cursor: pointer" href="index.html">
               <svg
                 class="home-icon"
                 xmlns="http://www.w3.org/2000/svg"
@@ -86,28 +86,49 @@
             >
           </div>
         </div>
-        <a href="create.html">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="pen-icon"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-            />
-          </svg>
-        </a>
+        <div class="search-bar">
+          <form>
+            <input type="text" placeholder="Filter posts" />
+          </form>
+        </div>
       </nav>
+    </div>
+    <div class="post-mobile">
+      <a href="index.html">
+        <svg
+          class="home-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+          />
+        </svg>
+      </a>
+      <a href="create.html">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="plus-icon"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4v16m8-8H4"
+          />
+        </svg>
+      </a>
     </div>
     <div class="post">
       <form action="">
         <img src="reddit-assets/default-user.png" alt="default user image" />
-        <a href="create.html"> <input type="text" placeholder="Create Post"/></a>
+        <a href="create.html">
+          <input type="text" placeholder="Create Post"
+        /></a>
       </form>
     </div>
     <script src="script.js"></script>
