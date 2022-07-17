@@ -60,10 +60,46 @@ body {
 .icon-container a {
   color: white;
 }
+.post {
+  display: none;
+}
 /* media queries */
 @media only screen and (min-width: 650px) {
   .pen-icon {
     display: none;
+  }
+  .post {
+    display: block;
+    width: 80vw;
+    margin: 30px auto;
+  }
+  .post form {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--nav-bar-color);
+    border-radius: 7px;
+    padding: 7px;
+  }
+  .post form input {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    right: 20px;
+    left: 75px;
+    background-color: var(--drop-down-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    padding: 0 10px;
+    color: var(--text-input-color);
+  }
+  .post form img {
+    margin-right: 10px;
+    object-fit: cover;
+  }
+  .post form input:focus {
+    outline: none;
   }
 }
 /* CREATE.HTML */
@@ -120,6 +156,7 @@ body {
   color: var(--placeholder-color);
   resize: vertical;
   color: var(--text-input-color);
+  padding: 10px;
 }
 .create-post input {
   margin-bottom: 15px;
