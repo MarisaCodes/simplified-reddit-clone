@@ -43,26 +43,43 @@ body {
 .nav-bar svg {
   cursor: pointer;
 }
-.icon-container div {
+.icon-container a {
   display: flex;
   align-items: center;
 }
 .home-icon,
 .pen-icon {
   width: 25px;
+  padding-right: 10px;
   color: white;
 }
 .pen-icon {
   padding-right: 10px;
   display: inline;
 }
-.icon-container div > a {
+.icon-container a {
   color: white;
-  padding-left: 10px;
 }
-
+/* media queries */
+@media only screen and (min-width: 650px) {
+  .pen-icon {
+    display: none;
+  }
+}
 /* CREATE.HTML */
-
+/* x mark on nav bar */
+.x-mark {
+  color: var(--text-input-color);
+  width: 30px;
+  padding: 10px;
+}
+.create-post-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min-content;
+  margin: 0 auto;
+}
 /* dropdown div */
 .drop-down {
   display: flex;
@@ -70,20 +87,21 @@ body {
   justify-content: space-between;
   background-color: var(--drop-down-color);
   padding: 10px;
-  width: 250px;
-  margin: 30px auto;
+  margin: 30px 0;
   border-radius: 7px;
 }
 .drop-down div:first-child {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  margin-right: 40px;
 }
 .drop-down img {
   width: 23px;
   margin-right: 5px;
 }
 .drop-down span {
+  font-size: medium;
   color: var(--placeholder-color);
 }
 .drop-down svg {
@@ -97,9 +115,8 @@ body {
   border: 1px solid var(--input-border-color);
   background-color: var(--nav-bar-color);
   display: block;
-  width: 90%;
-  margin: 5px auto;
   border-radius: 5px;
+  width: 90vw;
   color: var(--placeholder-color);
   resize: vertical;
   color: var(--text-input-color);
@@ -134,4 +151,24 @@ body {
 }
 .create-post .btn:hover {
   background-color: #b8bbbc;
+}
+
+/* media queries */
+@media only screen and (min-width: 650px) {
+  .create-post input,
+  .create-post textarea {
+    width: 50vw;
+  }
+  .create-post-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .create-post form {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--drop-down-color);
+  }
+  .drop-down {
+    align-self: flex-start;
+  }
 }
