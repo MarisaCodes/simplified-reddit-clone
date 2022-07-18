@@ -1,4 +1,4 @@
-if (window.location.pathname === "/create.html") {
+if (window.location.pathname.includes("create.html")) {
   const community = document.querySelector(".communities");
   //clicking the downwards arrow in the create.html page
   document.addEventListener("click", (e) => {
