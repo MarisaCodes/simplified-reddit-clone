@@ -30,8 +30,15 @@
     </div>
     <div class="create-post-wrapper">
       <div class="drop-down">
-        <form>
-          <input class="community-input" type="text" placeholder="Choose a community" />
+        <form autocomplete="off">
+          <input
+            autocomplete="off"
+            required
+            class="community-input"
+            type="text"
+            placeholder="Choose a community"
+            onkeyup="checkUserInput()"
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="down-arrow"
@@ -41,6 +48,7 @@
             stroke-width="2"
           >
             <path
+              class="down-arrow"
               stroke-linecap="round"
               stroke-linejoin="round"
               d="M19 9l-7 7-7-7"
@@ -114,16 +122,25 @@
       </div>
 
       <div class="create-post">
-        <form>
-          <input type="text" placeholder="Title" />
+        <form autocomplete="off">
+          <input
+            onkeyup="checkUserInput()"
+            id="user-title-input"
+            autocomplete="off"
+            type="text"
+            placeholder="Title"
+            required
+          />
           <textarea
             name=""
-            id=""
+            id="user-textrea-input"
             cols="30"
             rows="10"
             placeholder="Text (optional)"
           ></textarea>
-          <div class="btn">Post</div>
+          <a href="post-detail.html">
+            <div class="post-btn empty-input">Post</div>
+          </a>
         </form>
       </div>
     </div>
