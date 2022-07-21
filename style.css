@@ -36,7 +36,7 @@ body {
   align-items: center;
   background-color: var(--nav-bar-color);
 }
-/* contains a tag>reddit icon and div>home icon */
+/* contains 'a' tag>reddit icon and div>home icon */
 .icon-container {
   display: flex;
   flex-direction: row;
@@ -116,7 +116,48 @@ body {
 .post {
   display: none;
 }
+/* main - posts onload and user created posts styling */
+.reddit-posts {
+  color: var(--text-input-color);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+.reddit-post-card {
+  background-color: #121212;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.sub-name {
+  font-size: small;
+}
+.time-since {
+  font-size: small;
+  color: var(--placeholder-color);
+}
+.clock-icon {
+  width: 10px;
+  color: var(--placeholder-color);
+}
+.post-title {
+  font-size: larger;
+}
 /* media queries */
+@media only screen and (max-width: 650px) {
+  .icon-container div {
+    display: none; /* hiding home icon and home text div*/
+  }
+  .icon-container a svg {
+    margin: 0;
+  }
+  .post-content{
+    display: none;
+  }
+  .reddit-posts{
+    padding-bottom: 20px;
+  }
+}
 @media only screen and (min-width: 650px) {
   .plus-icon {
     display: none;
@@ -126,7 +167,7 @@ body {
   }
   .post {
     display: block;
-    width: 50vw;
+    width: 60vw;
     margin: 30px auto;
   }
   .post form {
@@ -135,6 +176,7 @@ body {
     flex-direction: row;
     align-items: center;
     background-color: var(--nav-bar-color);
+    border: 1px solid var(--input-border-color);
     border-radius: 7px;
     padding: 10px;
   }
@@ -162,14 +204,14 @@ body {
   .post form input:focus {
     outline: none;
   }
-}
-
-@media only screen and (max-width: 650px) {
-  .icon-container div {
-    display: none; /* hiding home icon and home text div*/
-  }
-  .icon-container a svg {
-    margin: 0;
+  .reddit-post-card{
+    width: 60vw;
+    margin: 0 auto;
+    padding: 20px 40px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    box-shadow: 30px 0 #161617 inset;
+    background-color: var(--nav-bar-color);
   }
 }
 /* CREATE.HTML */
@@ -298,11 +340,12 @@ body {
   display: flex;
   flex-direction: column;
 }
-.create-post a{
+.create-post a {
   align-self: flex-end;
   color: #000;
 }
-.create-post .post-btn, .empty-input {
+.create-post .post-btn,
+.empty-input {
   background-color: #d7dadc;
   text-align: center;
   width: 50px;
