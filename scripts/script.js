@@ -207,16 +207,18 @@ if (
   window.location.pathname === "/"
 ) {
   //CodeByProjectsAPI.setup();
-  CodeByProjectsAPI.getPosts().then((response) => {
-    if (!response.length) {
-      throw Error("could not fetch data");
-    } else {
-      for (let i = response.length - 1; i >= 0; i--) {
-        // createPost(); this function creates posts
-        createPostsOnload(response[i]);
+  window.onload = () => {
+    CodeByProjectsAPI.getPosts().then((response) => {
+      if (!response.length) {
+        throw Error("could not fetch data");
+      } else {
+        for (let i = response.length - 1; i >= 0; i--) {
+          // createPost(); this function creates posts
+          createPostsOnload(response[i]);
+        }
       }
-    }
-  });
+    });
+  };
 }
 function v3DotsScript() {
   // code to run after redirect to post-detail.html
