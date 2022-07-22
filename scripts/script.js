@@ -1,4 +1,4 @@
-if (window.location.pathname.includes("create.html")) {
+if (window.location.pathname.includes("create.html")) { // code to be executed when user is in creates page
   const community = document.querySelector(".communities");
   //clicking the downwards arrow in the create.html page
   document.addEventListener("click", (e) => {
@@ -49,14 +49,15 @@ if (window.location.pathname.includes("create.html")) {
     }
   }
 }
-const main = document.querySelector(".reddit-posts");
-const currentPosts = document.querySelector(".reddit-posts").children;
-const arrCurrentPosts = Array.from(currentPosts);
 
-if (window.location.pathname.includes("index.html")) {
-  const currentPosts = document.querySelector(".reddit-posts").children;
-  const arrCurrentPosts = Array.from(currentPosts);
-  const postHtmlTemplate = `
+if (
+  window.location.pathname.includes("index.html") ||
+  window.location.pathname === "/"
+) { // code to be executed in root/ index.html page
+  let main = document.querySelector(".reddit-posts");
+
+  // inner html of a reddit post div
+  const postHtmlTemplate = ` 
   <div class="post-header">
     <span class="sub-name"></span>
     <svg
@@ -78,7 +79,9 @@ if (window.location.pathname.includes("index.html")) {
     
   </div>
   <div class="post-content"></div>`;
-  function calcTimeDiffInHours(timeThen, timeNow) {
+  function calcTimeDiff(timeThen, timeNow) {
+    /* function that calculates the time difference between post creation time
+    and current local time of user */
     // each of the time values is in the formaat hh:mm (hours:minutes, example 11:56)
     timeThen = timeThen.split(":");
     timeNow = timeNow.split(":");
@@ -102,19 +105,21 @@ if (window.location.pathname.includes("index.html")) {
   }
 
   function timeSinceCalc(created) {
+    // this function is more specific since I use it to access the actual data
+    //example created value string: (10:41 22) meaning 10:41am and date is 22nd
     let time = new Date();
-    console.log(time.getDate());
     let timeNow = `${time.getHours()}` + `:${time.getMinutes()}`;
     let spaceBeforeDay = created.indexOf(" ");
-    let dayCreated = created.slice(spaceBeforeDay, created.length);
+    let dayCreated = created.slice(spaceBeforeDay, created.length); // slicing the "created" string at the space between the time and the date
     if (time.getDate() == dayCreated) {
       let timeCreated = created.substring(0, spaceBeforeDay);
-      return calcTimeDiffInHours(timeCreated, timeNow);
+      return calcTimeDiff(timeCreated, timeNow);
     } else {
-      if (arrCurrentPosts.length) {
-        for (let i = 0; i < arrCurrentPosts.length; i++) {
-          arrCurrentPosts[i].remove();
-        }
+      // if the post creation date is not equal to the current local date then delete all posts (to later update page)
+      let currentPosts = document.querySelector(".reddit-posts").children;
+      let arrCurrentPosts = Array.from(currentPosts);
+      for (let i = 0; i < arrCurrentPosts.length; i++) {
+        arrCurrentPosts[i].remove();
       }
     }
   }
@@ -124,7 +129,6 @@ if (window.location.pathname.includes("index.html")) {
     post.className = "reddit-post-card";
     post.innerHTML = postHtmlTemplate;
     post.querySelector(".sub-name").innerText = `r/${data.subreddit}`;
-    console.log(timeSinceCalc(data.created));
     post.querySelector(".time-since").innerText = `${timeSinceCalc(
       data.created
     )}`;
@@ -132,25 +136,19 @@ if (window.location.pathname.includes("index.html")) {
     post.querySelector(".post-content").innerText = data.text;
     main.appendChild(post);
   }
-
-  window.onload = () => {
-    if (arrCurrentPosts.length) {
-      for (let i = 0; i < arrCurrentPosts.length; i++) {
-        arrCurrentPosts[i].remove();
+  //CodeByProjectsAPI.setup();
+  CodeByProjectsAPI.getPosts().then((response) => {
+    if (!response.length) {
+      throw Error("could not fetch data");
+    } else {
+      for (let i = 0; i < response.length; i++) {
+        // createPost(); this function creates posts
+        createPostsOnload(response[i]);
       }
     }
-    //CodeByProjectsAPI.setup();
-    CodeByProjectsAPI.getPosts().then((response) => {
-      if (!response.length) {
-        throw Error("could not fetch data");
-      } else {
-        for (let i = 0; i < response.length; i++) {
-          // createPost();
-          createPostsOnload(response[i]);
-        }
-      }
-    });
-  };
+  });
+  // window.onload = () => {
+  // };
 }
 
 // API Examples

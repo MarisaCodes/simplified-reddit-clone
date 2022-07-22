@@ -143,6 +143,10 @@ body {
 .post-title {
   font-size: larger;
 }
+.post-content {
+  font-size: 14px;
+  margin-top: 20px;
+}
 /* media queries */
 @media only screen and (max-width: 650px) {
   .icon-container div {
@@ -151,10 +155,10 @@ body {
   .icon-container a svg {
     margin: 0;
   }
-  .post-content{
+  .post-content {
     display: none;
   }
-  .reddit-posts{
+  .reddit-posts {
     padding-bottom: 20px;
   }
 }
@@ -204,7 +208,7 @@ body {
   .post form input:focus {
     outline: none;
   }
-  .reddit-post-card{
+  .reddit-post-card {
     width: 60vw;
     margin: 0 auto;
     padding: 20px 40px;
