@@ -205,10 +205,9 @@ if (window.location.pathname.includes("post-detail.html")) {
 if (
   window.location.pathname.includes("index.html") ||
   window.location.pathname === "/" ||
-  window.location.pathname ===
-  '/simplified-reddit-clone/'
+  window.location.pathname === "/simplified-reddit-clone/"
 ) {
-  //CodeByProjectsAPI.setup();
+  CodeByProjectsAPI.setup();
   window.onload = () => {
     CodeByProjectsAPI.getPosts().then((response) => {
       if (!response.length) {
