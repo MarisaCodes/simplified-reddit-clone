@@ -140,6 +140,11 @@ body {
   width: 10px;
   color: var(--placeholder-color);
 }
+.v-3-dots{
+  width: 20px;
+  float: right;
+  color: var(--placeholder-color);
+}
 .post-title {
   font-size: larger;
 }
@@ -418,7 +423,8 @@ body {
   border: 1px solid var(--input-border-color);
   border-radius: 5px;
 }
-.options-card div, .options-card a {
+.options-card div,
+.options-card a {
   color: #7e8081;
   padding: 5px;
   margin: 10px;
@@ -449,7 +455,7 @@ hr {
     align-items: flex-start;
     margin: 20px;
   }
-  .options-card{
+  .options-card {
     align-self: flex-start;
     margin-left: 20px;
   }
