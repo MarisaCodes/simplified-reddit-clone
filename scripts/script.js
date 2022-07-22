@@ -204,7 +204,9 @@ if (window.location.pathname.includes("post-detail.html")) {
 
 if (
   window.location.pathname.includes("index.html") ||
-  window.location.pathname === "/"
+  window.location.pathname === "/" ||
+  window.location.pathname ===
+    "https://marisacodes.github.io/simplified-reddit-clone/"
 ) {
   //CodeByProjectsAPI.setup();
   window.onload = () => {
