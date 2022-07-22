@@ -1,4 +1,5 @@
-if (window.location.pathname.includes("create.html")) { // code to be executed when user is in creates page
+if (window.location.pathname.includes("create.html")) {
+  // code to be executed when user is in creates page
   const community = document.querySelector(".communities");
   //clicking the downwards arrow in the create.html page
   document.addEventListener("click", (e) => {
@@ -48,12 +49,42 @@ if (window.location.pathname.includes("create.html")) { // code to be executed w
       postBtn.style.cursor = "not-allowed";
     }
   }
+  // plan for following code:
+  /* 1. take user input from forms and textarea
+     2. use a post method on user input to update the database
+     3. display user's post on homepage
+     4. user should submit all required info using the post button
+  */
+  postBtn.addEventListener("click", (event) => {
+    if (!postBtn.classList.contains("empty-input")) {
+      let subreddit = selectCommunity.value;
+      let titleText = title.value;
+      let text = document.querySelector("textarea").value;
+      CodeByProjectsAPI.createPost(subreddit, titleText, text)
+        .then((response) => {
+          if (response) {
+            if (response.message) {
+              throw Error(response.message);
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  });
 }
+
+if(window.location.pathname.includes('post-detail.html')){
+
+}
+
 
 if (
   window.location.pathname.includes("index.html") ||
   window.location.pathname === "/"
-) { // code to be executed in root/ index.html page
+) {
+  // code to be executed in root/ index.html page
   let main = document.querySelector(".reddit-posts");
 
   // inner html of a reddit post div
@@ -141,7 +172,7 @@ if (
     if (!response.length) {
       throw Error("could not fetch data");
     } else {
-      for (let i = 0; i < response.length; i++) {
+      for (let i = response.length - 1; i > 0; i--) {
         // createPost(); this function creates posts
         createPostsOnload(response[i]);
       }

@@ -20,19 +20,19 @@ class CodeByProjectsAPI {
       {
         subreddit: "javascript",
         title: "example javascript title",
-        text: "example javascript text",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, mollitia? Sed, earum libero! Dolorem aspernatur at sit nam repellendus quis.",
         created,
       },
       {
         subreddit: "learnjavascript",
-        title: "example learnjavascript title",
-        text: "example learnjavascript text",
+        title: "Lorem ipsum dolor sit amet.",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quam, blanditiis culpa quod impedit eius.",
         created,
       },
       {
         subreddit: "react",
         title: "example react title",
-        text: "example react text",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit voluptatum assumenda possimus accusantium aliquam quam inventore fuga deserunt ratione excepturi, tempora animi vel quasi doloremque nam architecto, aut veniam laborum.",
         created,
       },
     ]);
@@ -91,7 +91,9 @@ class CodeByProjectsAPI {
     //const created = Date.now();
     const date = new Date();
     const created =
-      `${date.getHours()}` + `:${date.getMinutes()}`.padStart(2, "0");
+      `${date.getHours()}` +
+      `:${date.getMinutes()}`.padStart(2, "0") +
+      ` ${date.getDate()}`;
     await db.posts.add({ subreddit, title, text, created });
   }
 }
