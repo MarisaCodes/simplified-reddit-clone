@@ -211,7 +211,7 @@ if (
     if (!response.length) {
       throw Error("could not fetch data");
     } else {
-      for (let i = response.length - 1; i > 0; i--) {
+      for (let i = response.length - 1; i >= 0; i--) {
         // createPost(); this function creates posts
         createPostsOnload(response[i]);
       }
