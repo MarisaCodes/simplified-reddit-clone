@@ -134,13 +134,14 @@
             required
           />
           <textarea
+          onkeyup="checkUserInput()"
             name=""
             id="user-textrea-input"
             cols="30"
             rows="10"
             placeholder="Text (optional)"
           ></textarea>
-          <a href="post-detail.html">
+          <a>
             <div class="post-btn empty-input">Post</div>
           </a>
         </form>

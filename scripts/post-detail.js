@@ -77,9 +77,9 @@ function createPostsOnload(data) {
   )}`;
   post.querySelector(".post-title").innerText = data.title;
   post.querySelector(".post-content").innerText = data.text;
+  post.querySelector(".id").innerText = data.id;
   main.appendChild(post);
 }
-
 
 const h3Dots = document.querySelector(".h-3-dots");
 const optionsCard = document.querySelector(".options-card");
@@ -90,17 +90,16 @@ h3Dots.addEventListener("click", () => {
     optionsCard.classList.add("display");
   }
 });
+
+function getParam(paramName) {
+  let param = new URLSearchParams(window.location.search);
+  return param.get(paramName);
+}
+
 window.onload = () => {
   let main = window.document.querySelector(".reddit-posts");
-  CodeByProjectsAPI.getPosts()
-    .then((response) => {
-      if (!response.length) {
-        throw Error("could not fetch data");
-      } else {
-        createPostsOnload(response[response.length - 1]);
-      }
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+  let id = Number(getParam("id"));
+  CodeByProjectsAPI.getPost(id).then((response) => {
+    createPostsOnload(response);
+  });
 };
