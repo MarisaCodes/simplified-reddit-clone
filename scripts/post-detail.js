@@ -15,6 +15,7 @@ const postHtmlTemplate = `
       />
     </svg>
     <span class="time-since"></span>
+    <span class='id' style='display:none;'></span>
   </div>
   <br />
   <div class="post-title">
@@ -66,6 +67,7 @@ function timeSinceCalc(created) {
 }
 
 function createPostsOnload(data) {
+  console.log(data.id);
   // this function takes a response object and uses it to build a reddit post
   let main = document.querySelector(".reddit-posts");
   let post = document.createElement("div");
