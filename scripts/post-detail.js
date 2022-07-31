@@ -67,7 +67,7 @@ function timeSinceCalc(created) {
 }
 
 function createPostsOnload(data) {
-  console.log(data.id);
+  //console.log(data.id);
   // this function takes a response object and uses it to build a reddit post
   let main = document.querySelector(".reddit-posts");
   let post = document.createElement("div");
@@ -101,6 +101,7 @@ function getParam(paramName) {
 window.onload = () => {
   let main = window.document.querySelector(".reddit-posts");
   let id = Number(getParam("id"));
+  document.querySelector('.save-btn').parentElement.setAttribute('href',`index.html?id=${id}`);
   CodeByProjectsAPI.getPost(id).then((response) => {
     createPostsOnload(response);
   });

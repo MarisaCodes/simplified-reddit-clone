@@ -45,7 +45,7 @@ function calcTimeDiff(timeThen, timeNow) {
   }
 }
 
-function timeSinceCalc(created) {
+function timeSinceCalc(created,dateStr) {
   // this function is more specific since I use it to access the actual data
   //example created value string: (10:41 22) meaning 10:41am and date is 22nd
   let time = new Date();
@@ -56,12 +56,7 @@ function timeSinceCalc(created) {
     let timeCreated = created.substring(0, spaceBeforeDay);
     return calcTimeDiff(timeCreated, timeNow);
   } else {
-    // if the post creation date is not equal to the current local date then delete all posts (to later update page)
-    let currentPosts = document.querySelector(".reddit-posts").children;
-    let arrCurrentPosts = Array.from(currentPosts);
-    for (let i = 0; i < arrCurrentPosts.length; i++) {
-      arrCurrentPosts[i].remove();
-    }
+    return dateStr;
   }
 }
 
@@ -73,11 +68,81 @@ function createPostsOnload(data) {
   post.innerHTML = postHtmlTemplate;
   post.querySelector(".sub-name").innerText = `r/${data.subreddit}`;
   post.querySelector(".time-since").innerText = `${timeSinceCalc(
-    data.created
+    data.created,data.dateStr
   )}`;
   post.querySelector(".post-title").innerText = data.title;
   post.querySelector(".post-content").innerText = data.text;
+  if(window.localStorage.getItem(data.id)){
+    let spanId = document.createElement("span");
+        spanId.classList.add("id", "display");
+        spanId.innerText = data.id;
+        let svg = document.createElement("span");
+        svg.innerHTML = `<svg
+    class="v-3-dots"
+    onclick="v3DotsScript(event)"
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-5 w-5"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
+    <path
+      d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
+    />
+  </svg>`;
+  let options = document.createElement('div');
+  options.classList.add('index-options-card', 'display');
+  let optionCard = 
+  ` 
+  <a href="edit.html">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="pen-icon"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path
+        class="pen-icon"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+      />
+    </svg>
+    Edit
+  </a>
+
+  <hr />
+  <div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="trash-can"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path
+        class="trash-can"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+      />
+    </svg>
+    Delete
+  </div>`;
+  options.innerHTML = optionCard;
+  post.querySelector(".post-header").appendChild(svg);
+  post.querySelector(".post-header").appendChild(spanId);
+  post.querySelector('.post-header').appendChild(options);
+
+  }
   main.appendChild(post);
+}
+
+function getParam(paramName) {
+  let param = new URLSearchParams(window.location.search);
+  return param.get(paramName);
 }
 
 //CodeByProjectsAPI.setup();
@@ -90,6 +155,45 @@ window.onload = () => {
         // createPost(); this function creates posts
         createPostsOnload(response[i]);
       }
+      if (getParam("id") !== null) {
+        let createdPost = document.querySelector(".reddit-post-card");
+        let svg = document.createElement("span");
+        svg.innerHTML = `<svg
+    class="v-3-dots"
+    onclick="v3DotsScript(event)"
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-5 w-5"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
+    <path
+      d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
+    />
+  </svg>`;
+        let spanId = document.createElement("span");
+        spanId.classList.add("id", "display");
+        spanId.innerText = response[response.length - 1].id;
+        createdPost.querySelector(".post-header").appendChild(svg);
+        createdPost.querySelector(".post-header").appendChild(spanId);
+        localStorage.setItem(response[response.length - 1].id, createdPost.innerHTML);
+        location.replace('index.html');
+      }
     }
   }); // will add a .catch
 };
+
+function v3DotsScript(event) {
+  let indexOptions =
+    event.target.parentElement.parentElement.parentElement.querySelector(
+      ".index-options-card"
+    );
+  let spanId = event.target.parentElement.parentElement.querySelector(".id");
+  if (spanId) {
+    //console.log(spanId.innerText);
+  }
+  if (indexOptions.classList.contains("display")) {
+    indexOptions.classList.remove("display");
+  } else {
+    indexOptions.classList.add("display");
+  }
+}

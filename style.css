@@ -107,6 +107,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1;
   padding: 10px;
   background-color: var(--nav-bar-color);
 }
@@ -128,7 +129,6 @@ body {
   background-color: #121212;
   padding: 20px;
   box-sizing: border-box;
-  cursor: pointer;
 }
 .sub-name {
   font-size: small;
@@ -145,6 +145,29 @@ body {
   width: 20px;
   float: right;
   color: var(--placeholder-color);
+  cursor: pointer;
+}
+.post-header{
+  position: relative;
+}
+.index-options-card{
+  background-color: var(--nav-bar-color);
+  width: 120px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 5px;
+  box-shadow: 0 0 10px #343536;
+  position: absolute;
+  right: 2px;
+}
+.index-options-card div,
+.index-options-card a {
+  color: #7e8081;
+  padding: 5px;
+  margin: 10px;
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+  justify-content: flex-start;
 }
 .post-title {
   font-size: larger;
@@ -447,6 +470,22 @@ hr {
   background-color: #161617;
   margin-bottom: 10px;
 }
+.save-btn{
+  color: #000;
+  background-color: #d7dadc;
+  text-align: center;
+  width: 55px;
+  padding: 5px;
+  border-radius: 15px;
+  font-weight: 700;
+}
+.save-btn:hover{
+  background-color: #b8bbbc;
+  cursor: pointer;
+}
+.post-details-wrapper a{
+  align-self: flex-end;
+}
 @media only screen and (min-width: 650px) {
   .post-details-wrapper {
     width: 60vw;
@@ -463,5 +502,8 @@ hr {
   .options-card {
     align-self: flex-start;
     margin-left: 20px;
+  }
+  .save-btn{
+    margin-right: 50px;
   }
 }

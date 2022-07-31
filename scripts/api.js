@@ -15,25 +15,28 @@ class CodeByProjectsAPI {
       `${date.getHours()}` +
       `:${date.getMinutes()}`.padStart(2, "0") +
       ` ${date.getDate()}`;
-
+    const dateStr = date.toLocaleDateString();
     await db.posts.bulkAdd([
       {
         subreddit: "javascript",
         title: "example javascript title",
         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, mollitia? Sed, earum libero! Dolorem aspernatur at sit nam repellendus quis.",
         created,
+        dateStr,
       },
       {
         subreddit: "learnjavascript",
         title: "Lorem ipsum dolor sit amet.",
         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quam, blanditiis culpa quod impedit eius.",
         created,
+        dateStr,
       },
       {
         subreddit: "react",
         title: "example react title",
         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit voluptatum assumenda possimus accusantium aliquam quam inventore fuga deserunt ratione excepturi, tempora animi vel quasi doloremque nam architecto, aut veniam laborum.",
         created,
+        dateStr,
       },
     ]);
   }
@@ -92,8 +95,9 @@ class CodeByProjectsAPI {
     const date = new Date();
     const created =
       `${date.getHours()}` +
-      `:${date.getMinutes()}`.padStart(2, "0") +
+      `:${date.getMinutes()}`.trim().padStart(2, "0") +
       ` ${date.getDate()}`;
-    await db.posts.add({ subreddit, title, text, created });
+    const dateStr = date.toLocaleDateString();
+    await db.posts.add({ subreddit, title, text, created, dateStr });
   }
 }
