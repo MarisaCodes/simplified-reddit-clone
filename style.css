@@ -138,6 +138,12 @@ body {
   width: 25px;
   display: inline;
 }
+.trash-icn,
+.trash-icn-nav {
+  width: 25px;
+  color: white;
+  float: right;
+}
 .mobile-home-icon {
   display: none;
 }
@@ -220,6 +226,9 @@ body {
 }
 /* media queries */
 @media only screen and (max-width: 650px) {
+  .trash-icn-nav {
+    display: none;
+  }
   .icon-container div {
     display: none; /* hiding home icon and home text div*/
   }

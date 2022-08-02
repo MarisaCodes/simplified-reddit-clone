@@ -233,4 +233,16 @@ document.addEventListener("click", (event) => {
     event.target.parentElement.classList.add("display");
     event.target.parentElement.parentElement.parentElement.remove();
   }
+  if (
+    event.target.classList.contains("trash-icn") ||
+    event.target.classList.contains("trash-icn-nav")
+  ) {
+    CodeByProjectsAPI.getPosts().then((response) => {
+      response.forEach((element) => {
+        CodeByProjectsAPI.deletePost(element.id);
+        localStorage.removeItem(element.id);
+        location.reload();
+      });
+    });
+  }
 });
