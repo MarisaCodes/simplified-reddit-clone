@@ -29,7 +29,7 @@ body {
 }
 /* INDEX.HTML */
 /* nav bar styles */
-.nav-bar{
+.nav-bar {
   position: sticky;
   top: 0;
   z-index: 1;
@@ -41,6 +41,41 @@ body {
   justify-content: flex-start;
   align-items: center;
   background-color: var(--nav-bar-color);
+  flex-wrap: wrap;
+}
+.refresh-lg,
+.refresh-sm {
+  color: white;
+  background-image: linear-gradient(to right, #4e44c9, #a846b3);
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-repeat: no-repeat;
+  width: max-content;
+  cursor: pointer;
+  margin: 10px;
+}
+.refresh-lg {
+  position: sticky;
+  top: 70px;
+  margin: 20px 20px 20px auto;
+}
+@media only screen and (min-width: 650px) {
+  .refresh-sm {
+    display: none;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .refresh-lg {
+    display: none;
+  }
+  .nav-bar nav {
+    justify-content: center;
+  }
+}
+.refresh-lg:hover,
+.refresh-sm:hover {
+  box-shadow: 0 0 10000px inset rgba(51, 51, 51, 0.5);
+  color: #96989a;
 }
 /* contains 'a' tag>reddit icon and div>home icon */
 .icon-container {
@@ -517,7 +552,8 @@ hr {
 }
 
 /*EDIT.HTML style*/
-.cancel-btn,.save-edit-btn{
+.cancel-btn,
+.save-edit-btn {
   background-color: #d7dadc;
   text-align: center;
   width: 50px;
@@ -527,12 +563,13 @@ hr {
   margin: 10px;
   cursor: pointer;
 }
-.edit-form div{
-display: flex;
-flex-direction: row-reverse;
-justify-content: flex-start;
+.edit-form div {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
 }
-.edit-form div .post-btn,.edit-form div .save-edit-btn{
+.edit-form div .post-btn,
+.edit-form div .save-edit-btn {
   justify-content: center;
 }
 .not-allowed {

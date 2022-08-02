@@ -151,7 +151,16 @@ function getParam(paramName) {
   return param.get(paramName);
 }
 
-//CodeByProjectsAPI.setup();
+document.addEventListener("click", (e) => {
+  if (
+    e.target.classList.contains("refresh-lg") ||
+    e.target.classList.contains("refresh-sm")
+  ) {
+    CodeByProjectsAPI.setup();
+    location.reload();
+  }
+});
+
 window.onload = () => {
   CodeByProjectsAPI.getPosts().then((response) => {
     if (!response.length) {
