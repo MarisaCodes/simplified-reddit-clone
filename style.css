@@ -29,6 +29,12 @@ body {
 }
 /* INDEX.HTML */
 /* nav bar styles */
+.nav-bar{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 0 10px var(--back-ground-color);
+}
 .nav-bar nav {
   display: flex;
   flex-direction: row;
@@ -185,9 +191,9 @@ body {
   .icon-container a svg {
     margin: 0;
   }
-  .post-content {
+  /* .post-content {
     display: none;
-  }
+  } */
   .reddit-posts {
     padding-bottom: 20px;
   }

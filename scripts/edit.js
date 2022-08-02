@@ -7,7 +7,7 @@ function getParam(paramName) {
   return param.get(paramName);
 }
 cancel.addEventListener("click", () => {
-  window.location.replace("index.html");
+    window.location.replace(`index.html?id=${Number(getParam("id"))}`);
 });
 CodeByProjectsAPI.getPost(Number(getParam("id"))).then((response) => {
   titleText.placeholder = response.title;
@@ -21,20 +21,22 @@ save.addEventListener("click", () => {
       text: text.value,
       edited: true,
     });
-    window.location.replace("index.html");
+    window.location.replace(`index.html?id=${Number(getParam("id"))}`);
   } else if (titleText.value || text.value) {
     if (titleText.value) {
       CodeByProjectsAPI.updatePost(Number(getParam("id")), {
         title: titleText.value,
         edited: true,
       });
-      window.location.replace("index.html");
+      window.location.replace(`index.html?id=${Number(getParam("id"))}`);
+
     } else {
       CodeByProjectsAPI.updatePost(Number(getParam("id")), {
         text: text.value,
         edited: true,
       });
-      window.location.replace("index.html");
+      window.location.replace(`index.html?id=${Number(getParam("id"))}`);
+
     }
   }
 });

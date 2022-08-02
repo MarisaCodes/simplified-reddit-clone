@@ -73,6 +73,12 @@ function createPostsOnload(data) {
   )}`;
   post.querySelector(".post-title").innerText = data.title;
   post.querySelector(".post-content").innerText = data.text;
+  if (data.edited) {
+    let spanEdited = document.createElement("span");
+    spanEdited.innerText = "(edited)";
+    spanEdited.className = "time-since";
+    post.querySelector(".post-header").appendChild(spanEdited);
+  }
   if (window.localStorage.getItem(data.id)) {
     let spanId = document.createElement("span");
     spanId.classList.add("id", "display");
@@ -156,30 +162,37 @@ window.onload = () => {
         createPostsOnload(response[i]);
       }
       if (getParam("id") !== null) {
-        let createdPost = document.querySelector(".reddit-post-card");
-        let svg = document.createElement("span");
-        svg.innerHTML = `<svg
-    class="v-3-dots"
-    onclick="v3DotsScript(event)"
-    xmlns="http://www.w3.org/2000/svg"
-    class="h-5 w-5"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-  >
-    <path
-      d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
-    />
-  </svg>`;
-        let spanId = document.createElement("span");
-        spanId.classList.add("id", "display");
-        spanId.innerText = response[response.length - 1].id;
-        createdPost.querySelector(".post-header").appendChild(svg);
-        createdPost.querySelector(".post-header").appendChild(spanId);
-        localStorage.setItem(
-          response[response.length - 1].id,
-          createdPost.innerHTML
-        );
-        location.replace("index.html");
+        if (
+          document.querySelector(".reddit-post-card").firstElementChild
+            .childElementCount < 5
+        ) {
+          let createdPost = document.querySelector(".reddit-post-card");
+          let svg = document.createElement("span");
+          svg.innerHTML = `<svg
+      class="v-3-dots"
+      onclick="v3DotsScript(event)"
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
+      />
+    </svg>`;
+          let spanId = document.createElement("span");
+          spanId.classList.add("id", "display");
+          spanId.innerText = response[response.length - 1].id;
+          createdPost.querySelector(".post-header").appendChild(svg);
+          createdPost.querySelector(".post-header").appendChild(spanId);
+          localStorage.setItem(
+            response[response.length - 1].id,
+            createdPost.innerHTML
+          );
+          location.replace("index.html");
+        } else {
+          window.location.replace("index.html");
+        }
       }
     }
   }); // will add a .catch
@@ -207,6 +220,7 @@ document.addEventListener("click", (event) => {
       event.target.parentElement.previousElementSibling.innerText
     );
     CodeByProjectsAPI.deletePost(id);
+    localStorage.removeItem(id);
     event.target.parentElement.classList.add("display");
     event.target.parentElement.parentElement.parentElement.remove();
   }
