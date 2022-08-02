@@ -7,6 +7,6 @@
 
 - Edit or delete posts by clicking on the 3 dots icons.
 
-[Live Website](https://marisacodes.github.io/simplified-reddit-clone/)
+- [Live Website](https://marisacodes.github.io/simplified-reddit-clone/)
 
 - [Api and database by declanleebaldwin](https://github.com/declanleebaldwin)
