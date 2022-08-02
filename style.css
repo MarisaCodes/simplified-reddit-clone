@@ -147,10 +147,10 @@ body {
   color: var(--placeholder-color);
   cursor: pointer;
 }
-.post-header{
+.post-header {
   position: relative;
 }
-.index-options-card{
+.index-options-card {
   background-color: var(--nav-bar-color);
   width: 120px;
   border: 1px solid var(--input-border-color);
@@ -374,7 +374,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-.create-post a {
+.post-btn {
   align-self: flex-end;
   color: #000;
 }
@@ -470,7 +470,7 @@ hr {
   background-color: #161617;
   margin-bottom: 10px;
 }
-.save-btn{
+.save-btn {
   color: #000;
   background-color: #d7dadc;
   text-align: center;
@@ -479,11 +479,11 @@ hr {
   border-radius: 15px;
   font-weight: 700;
 }
-.save-btn:hover{
+.save-btn:hover {
   background-color: #b8bbbc;
   cursor: pointer;
 }
-.post-details-wrapper a{
+.post-details-wrapper a {
   align-self: flex-end;
 }
 @media only screen and (min-width: 650px) {
@@ -502,8 +502,34 @@ hr {
   .options-card {
     align-self: flex-start;
     margin-left: 20px;
+    top: 80px;
+    z-index: 1;
   }
-  .save-btn{
+  .save-btn {
     margin-right: 50px;
   }
+}
+
+/*EDIT.HTML style*/
+.cancel-btn,.save-edit-btn{
+  background-color: #d7dadc;
+  text-align: center;
+  width: 50px;
+  padding: 5px;
+  border-radius: 15px;
+  font-weight: 700;
+  margin: 10px;
+  cursor: pointer;
+}
+.edit-form div{
+display: flex;
+flex-direction: row-reverse;
+justify-content: flex-start;
+}
+.edit-form div .post-btn,.edit-form div .save-edit-btn{
+  justify-content: center;
+}
+.not-allowed {
+  cursor: not-allowed;
+  color: #7d7d7d;
 }

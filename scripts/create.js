@@ -54,15 +54,6 @@ function checkUserInput() {
   let text = document.querySelector("textarea");
   if (title.value !== "" && selectCommunity.value !== "" && text.value !== "") {
     postBtn.classList.remove("empty-input");
-
-    // now the user can go to post details page after the input is filled
-
-    CodeByProjectsAPI.getPosts().then((response) => {
-      postBtn.parentElement.setAttribute(
-        "href",
-        `post-detail.html?id=${response.length + 1}`
-      );
-    });
     postBtn.style.cursor = "pointer";
   } else {
     // if they're blank, style the 'post' button this way
@@ -85,6 +76,9 @@ postBtn.addEventListener("click", () => {
     let text = document.querySelector("textarea").value;
     CodeByProjectsAPI.createPost(subreddit, titleText, text)
       .then((response) => {
+        CodeByProjectsAPI.getPosts().then(response=>{
+          window.location.replace(`post-detail.html?id=${response[response.length-1].id}`)
+        })
         if (response) {
           if (response.message) {
             throw Error(response.message);

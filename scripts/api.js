@@ -12,8 +12,8 @@ class CodeByProjectsAPI {
     //const created = Date.now();
     const date = new Date();
     const created =
-      `${date.getHours()}` +
-      `:${date.getMinutes()}`.padStart(2, "0") +
+      `${date.getHours()}:` +
+      `${date.getMinutes()}`.padStart(2, "0") +
       ` ${date.getDate()}`;
     const dateStr = date.toLocaleDateString();
     await db.posts.bulkAdd([
@@ -94,8 +94,8 @@ class CodeByProjectsAPI {
     //const created = Date.now();
     const date = new Date();
     const created =
-      `${date.getHours()}` +
-      `:${date.getMinutes()}`.trim().padStart(2, "0") +
+      `${date.getHours()}:` +
+      `${date.getMinutes()}`.padStart(2, "0") +
       ` ${date.getDate()}`;
     const dateStr = date.toLocaleDateString();
     await db.posts.add({ subreddit, title, text, created, dateStr });

@@ -45,7 +45,7 @@ function calcTimeDiff(timeThen, timeNow) {
   }
 }
 
-function timeSinceCalc(created,dateStr) {
+function timeSinceCalc(created, dateStr) {
   // this function is more specific since I use it to access the actual data
   //example created value string: (10:41 22) meaning 10:41am and date is 22nd
   let time = new Date();
@@ -56,7 +56,7 @@ function timeSinceCalc(created,dateStr) {
     let timeCreated = created.substring(0, spaceBeforeDay);
     return calcTimeDiff(timeCreated, timeNow);
   } else {
-    return dateStr;
+    return dateStr + ` ${created.split(" ")[0]}`;
   }
 }
 
@@ -68,16 +68,17 @@ function createPostsOnload(data) {
   post.innerHTML = postHtmlTemplate;
   post.querySelector(".sub-name").innerText = `r/${data.subreddit}`;
   post.querySelector(".time-since").innerText = `${timeSinceCalc(
-    data.created,data.dateStr
+    data.created,
+    data.dateStr
   )}`;
   post.querySelector(".post-title").innerText = data.title;
   post.querySelector(".post-content").innerText = data.text;
-  if(window.localStorage.getItem(data.id)){
+  if (window.localStorage.getItem(data.id)) {
     let spanId = document.createElement("span");
-        spanId.classList.add("id", "display");
-        spanId.innerText = data.id;
-        let svg = document.createElement("span");
-        svg.innerHTML = `<svg
+    spanId.classList.add("id", "display");
+    spanId.innerText = data.id;
+    let svg = document.createElement("span");
+    svg.innerHTML = `<svg
     class="v-3-dots"
     onclick="v3DotsScript(event)"
     xmlns="http://www.w3.org/2000/svg"
@@ -89,11 +90,10 @@ function createPostsOnload(data) {
       d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
     />
   </svg>`;
-  let options = document.createElement('div');
-  options.classList.add('index-options-card', 'display');
-  let optionCard = 
-  ` 
-  <a href="edit.html">
+    let options = document.createElement("div");
+    options.classList.add("index-options-card", "display");
+    let optionCard = ` 
+  <a class="edit-btn">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="pen-icon"
@@ -113,7 +113,7 @@ function createPostsOnload(data) {
   </a>
 
   <hr />
-  <div>
+  <div class='delete'>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="trash-can"
@@ -131,11 +131,11 @@ function createPostsOnload(data) {
     </svg>
     Delete
   </div>`;
-  options.innerHTML = optionCard;
-  post.querySelector(".post-header").appendChild(svg);
-  post.querySelector(".post-header").appendChild(spanId);
-  post.querySelector('.post-header').appendChild(options);
-
+    options.innerHTML = optionCard;
+    options.firstElementChild.setAttribute("href", `edit.html?id=${data.id}`);
+    post.querySelector(".post-header").appendChild(svg);
+    post.querySelector(".post-header").appendChild(spanId);
+    post.querySelector(".post-header").appendChild(options);
   }
   main.appendChild(post);
 }
@@ -175,8 +175,11 @@ window.onload = () => {
         spanId.innerText = response[response.length - 1].id;
         createdPost.querySelector(".post-header").appendChild(svg);
         createdPost.querySelector(".post-header").appendChild(spanId);
-        localStorage.setItem(response[response.length - 1].id, createdPost.innerHTML);
-        location.replace('index.html');
+        localStorage.setItem(
+          response[response.length - 1].id,
+          createdPost.innerHTML
+        );
+        location.replace("index.html");
       }
     }
   }); // will add a .catch
@@ -197,3 +200,14 @@ function v3DotsScript(event) {
     indexOptions.classList.add("display");
   }
 }
+
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("delete")) {
+    let id = Number(
+      event.target.parentElement.previousElementSibling.innerText
+    );
+    CodeByProjectsAPI.deletePost(id);
+    event.target.parentElement.classList.add("display");
+    event.target.parentElement.parentElement.parentElement.remove();
+  }
+});

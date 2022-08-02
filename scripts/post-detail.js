@@ -98,11 +98,28 @@ function getParam(paramName) {
   return param.get(paramName);
 }
 
+document.querySelector('.edit-btn').setAttribute('href',`edit.html?id=${getParam('id')}`)
+
 window.onload = () => {
-  let main = window.document.querySelector(".reddit-posts");
   let id = Number(getParam("id"));
   document.querySelector('.save-btn').parentElement.setAttribute('href',`index.html?id=${id}`);
   CodeByProjectsAPI.getPost(id).then((response) => {
     createPostsOnload(response);
   });
 };
+
+document.addEventListener('click',e=>{
+  if(e.target.classList.contains('delete')){
+    let post = document.querySelector('.reddit-post-card');
+    let id = Number(post.querySelector('.id').innerText);
+    post.remove();
+    CodeByProjectsAPI.deletePost(id)
+    let saveBtn = document.querySelector('.save-btn');
+    saveBtn.parentElement.removeAttribute('href');
+    saveBtn.style.cursor = 'not-allowed';
+    saveBtn.classList.remove('save-btn');
+    saveBtn.classList.add('empty-input');
+    optionsCard.classList.add("display");
+    optionsCard.firstElementChild.removeAttribute('href');
+  }
+})
